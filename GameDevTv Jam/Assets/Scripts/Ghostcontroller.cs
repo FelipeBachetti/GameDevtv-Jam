@@ -5,6 +5,8 @@ using UnityEngine;
 public class Ghostcontroller : MonoBehaviour
 {
     [SerializeField] private float speed;
+    
+    public GameObject cam;
 
     private Vector2 direction;
     private Animator anim;

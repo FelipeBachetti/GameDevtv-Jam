@@ -494,6 +494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 300
+  cam: {fileID: 1714180350}
 --- !u!61 &845491752
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -772,7 +773,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ghost: {fileID: 0}
+  cam: {fileID: 0}
   originalPos: {x: 0, y: 0, z: 0}
+  vcam: {fileID: 0}
 --- !u!1 &1393240056
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,7 +808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyType: 0
-  zombie: {fileID: 1351467038}
+  zombie: {fileID: 1351467041}
 --- !u!212 &1393240058
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1046,7 +1049,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.9923664, y: 1}
+    m_SensorSize: {x: 2.9885497, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

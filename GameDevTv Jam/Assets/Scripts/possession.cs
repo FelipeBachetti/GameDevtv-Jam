@@ -5,18 +5,19 @@ using UnityEngine;
 public class possession : MonoBehaviour
 {
     [SerializeField] private int bodyType;
-    [SerializeField] private GameObject zombie;
+    [SerializeField] private abandonBody zombie;
 
     private bool inRange;
     private GameObject player;
 
+    
     private void Update() {
         if(inRange && Input.GetButtonDown("Possess")){
+            zombie.cam = player.GetComponent<Ghostcontroller>().cam;
             player.SetActive(false);
-            zombie.SetActive(true);
-            zombie.GetComponent<abandonBody>().ghost = player;
-            zombie.GetComponent<abandonBody>().originalPos = zombie.transform.position;
-
+            zombie.gameObject.SetActive(true);
+            zombie.ghost = player;
+            zombie.originalPos = zombie.transform.position;
         }
     }
     
