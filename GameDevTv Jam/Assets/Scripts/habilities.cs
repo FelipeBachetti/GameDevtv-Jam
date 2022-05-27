@@ -5,12 +5,17 @@ using UnityEngine;
 public class habilities : MonoBehaviour
 {
     [SerializeField] private int bodyType;
-    [SerializeField] private Transform miningPoint;
-    [SerializeField] private float miningRange;
-    [SerializeField] private LayerMask breakableLayers;
+    [SerializeField] private Transform miningPoint, punchPoint;
+    [SerializeField] private float miningRange, punchRange;
+    [SerializeField] private LayerMask breakableLayers, pushableLayers;
 
-    private bool isMining;
+    private bool isActing;
     private float cooldown = .5f;
+    private Animator anim;
+
+    private void Awake() {
+        anim = GetComponent<Animator>();    
+    }
 
     void Update()
     {
@@ -18,6 +23,9 @@ public class habilities : MonoBehaviour
             case 0:
                 break;
             case 1:
+                if(Input.GetButtonDown("Fire1") && cooldown >= .25f){
+                    Punch();
+                }
                 break;
             case 2:
                 if(Input.GetButtonDown("Fire1") && cooldown >= .25f){
@@ -30,7 +38,7 @@ public class habilities : MonoBehaviour
         if(cooldown < 0.25f){
             cooldown += Time.deltaTime;
         }else{
-            isMining = false;
+            isActing = false;
         }
     }
 
@@ -41,11 +49,23 @@ public class habilities : MonoBehaviour
         {
             blocks.GetComponent<Block>().Break();
         }
-        isMining = true;
+        isActing = true;
+        cooldown = 0f;
+    }
+
+    public void Punch ()
+    {
+        anim.SetTrigger("isAttacking");
+        Collider2D[] hitBlocks = Physics2D.OverlapCircleAll(punchPoint.position, punchRange, pushableLayers);
+        foreach(Collider2D blocks in hitBlocks)
+        {
+            blocks.GetComponent<Box>().Push(blocks.transform.position.x - transform.position.x);
+        }
+        isActing = true;
         cooldown = 0f;
     }
 
     void OnDrawGizmosSelected(){
-        Gizmos.DrawWireSphere(miningPoint.position, miningRange);
+        Gizmos.DrawWireSphere(punchPoint.position, punchRange);
     }
 }

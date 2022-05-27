@@ -8,6 +8,7 @@ public class abandonBody : MonoBehaviour
     [HideInInspector] public GameObject ghost, cam;
     [HideInInspector] public Vector3 originalPos;
     [HideInInspector] public CinemachineVirtualCamera vcam;
+    [HideInInspector] public GameObject SFX;
     
     private void OnEnable() {
         vcam = cam.GetComponent<CinemachineVirtualCamera>();
@@ -22,6 +23,7 @@ public class abandonBody : MonoBehaviour
             vcam.Follow = ghost.transform;
             vcam.LookAt = ghost.transform;
             transform.position = originalPos;
+            SFX.SetActive(true);
             gameObject.SetActive(false);
         }
     }

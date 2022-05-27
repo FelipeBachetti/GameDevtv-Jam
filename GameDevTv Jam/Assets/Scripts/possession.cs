@@ -10,6 +10,8 @@ public class possession : MonoBehaviour
     private bool inRange;
     private GameObject player;
 
+    [SerializeField] private GameObject SFX;
+
     
     private void Update() {
         if(inRange && Input.GetButtonDown("Possess")){
@@ -18,6 +20,8 @@ public class possession : MonoBehaviour
             zombie.gameObject.SetActive(true);
             zombie.ghost = player;
             zombie.originalPos = zombie.transform.position;
+            zombie.SFX = SFX;
+            SFX.SetActive(false);
         }
     }
     

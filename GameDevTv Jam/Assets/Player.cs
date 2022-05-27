@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
 
     private Vector2 facingRight;
     private Vector2 facingLeft;
+    private Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class Player : MonoBehaviour
         facingRight = transform.localScale;
         facingLeft = transform.localScale;
         facingLeft.x = facingLeft.x * -1;
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -37,6 +39,16 @@ public class Player : MonoBehaviour
         if (rb.velocity.y == 0 && Input.GetKeyDown(KeyCode.Space)) //if the player is not mid air and "space" is pressed, then jump
         {
             rb.AddForce(Vector2.up * jumpforce, ForceMode2D.Impulse);
+        }
+        if(Mathf.Abs(direction)>0.01){
+            anim.SetBool("isWalking", true);
+        }else{
+            anim.SetBool("isWalking", false);
+        }
+        if(Mathf.Abs(rb.velocity.y)<0.01){
+            anim.SetBool("isJumping", false);
+        }else{
+            anim.SetBool("isJumping", true);
         }
     }
 
