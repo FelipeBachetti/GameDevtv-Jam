@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Zombie : MonoBehaviour
 {
     public float speed;
     public Rigidbody2D rb;
@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
         {
             transform.localScale = facingRight;
         }
-        if(direction < 0 && rb.velocity.y ==0)
+        if(direction < 0 && rb.velocity.y == 0)
         {
             transform.localScale = facingLeft;
         }
