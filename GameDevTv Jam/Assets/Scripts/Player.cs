@@ -16,13 +16,14 @@ public class Player : MonoBehaviour
     private Vector2 facingRight;
     private Vector2 facingLeft;
     private Animator anim;
-    private float timer;
+    private float timer, animationTimer=.6f;
 
     private bool isJumping, grounded1, grounded2, willDie;
 
     [SerializeField] private LayerMask whatIsGround1, whatIsGround2;
     [SerializeField] private Transform GroundCheck;
     [SerializeField] private float Radius;
+    [SerializeField] private bool autoAwake;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +40,14 @@ public class Player : MonoBehaviour
     void Update()
     {
         direction = Input.GetAxis("Horizontal");
+
+        if(autoAwake){
+            anim.SetBool("autoAwake", true);
+        }else if(animationTimer>0){
+            direction = 0f;
+            animationTimer -= Time.deltaTime;
+        }
+
         if(direction > 0 && rb.velocity.y == 0)
         {
             transform.localScale = facingRight;
@@ -47,7 +56,7 @@ public class Player : MonoBehaviour
         {
             transform.localScale = facingLeft;
         }
-        if (rb.velocity.y == 0 && Input.GetKeyDown(KeyCode.Space)) //if the player is not mid air and "space" is pressed, then jump
+        if (Mathf.Abs(rb.velocity.y)<=0.01 && Input.GetButtonDown("Jump")) //if the player is not mid air and "space" is pressed, then jump
         {
             rb.AddForce(Vector2.up * jumpforce, ForceMode2D.Impulse);
             isJumping = true;
@@ -94,6 +103,8 @@ public class Player : MonoBehaviour
     }
 
     private void Die(){
+        rb.velocity = new Vector2(0, 0);
+        anim.SetBool("isJumping", false);
         anim.SetTrigger("isDead");
         col.enabled = false;
         hab.enabled = false;
