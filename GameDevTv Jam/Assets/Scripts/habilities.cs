@@ -5,13 +5,16 @@ using UnityEngine;
 public class habilities : MonoBehaviour
 {
     [SerializeField] private int bodyType;
-    [SerializeField] private Transform miningPoint, punchPoint;
+    [SerializeField] private Transform miningPoint, punchPoint, firePoint;
     [SerializeField] private float miningRange, punchRange;
     [SerializeField] private LayerMask breakableLayers, pushableLayers;
+    [SerializeField] private GameObject bulletPrefab;
 
     private bool isActing;
     private float cooldown = .5f;
-    private Animator anim;
+    public Animator anim;
+
+    public bool isFalling;
 
     private void Awake() {
         anim = GetComponent<Animator>();    
@@ -21,6 +24,10 @@ public class habilities : MonoBehaviour
     {
         switch(bodyType){
             case 0:
+                if (Input.GetButtonDown("Fire1") && cooldown >= .25f)
+		        {
+			        Shoot();
+		        }
                 break;
             case 1:
                 if(Input.GetButtonDown("Fire1") && cooldown >= .25f){
@@ -33,12 +40,22 @@ public class habilities : MonoBehaviour
                 }
                 break;
             case 3:
+                if(isFalling){
+                    GetComponent<Player>().enabled = false;
+                    anim.SetBool("isFalling", true);
+                }else{
+                    anim.SetBool("isFalling", false);
+                }
                 break;
         }
         if(cooldown < 0.25f){
             cooldown += Time.deltaTime;
         }else{
             isActing = false;
+        }
+
+        if(isActing){
+            anim.SetTrigger("isAttacking");
         }
     }
 
@@ -65,7 +82,16 @@ public class habilities : MonoBehaviour
         cooldown = 0f;
     }
 
+    void Shoot ()
+	{
+		GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        if(transform.localScale.x<0){
+            bullet.transform.localScale *= -1; 
+            bullet.GetComponent<Bullet>().isRight = false;
+        }
+	}
+
     void OnDrawGizmosSelected(){
-        Gizmos.DrawWireSphere(punchPoint.position, punchRange);
+        Gizmos.DrawWireSphere(miningPoint.position, miningRange);
     }
 }

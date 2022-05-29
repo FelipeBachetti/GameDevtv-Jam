@@ -5,8 +5,8 @@ using Cinemachine;
 
 public class abandonBody : MonoBehaviour
 {
-    [HideInInspector] public GameObject ghost, cam;
-    [HideInInspector] public Vector3 originalPos;
+    public GameObject ghost, cam;
+    public Vector3 originalPos;
     [HideInInspector] public CinemachineVirtualCamera vcam;
     [HideInInspector] public GameObject SFX;
     
