@@ -82,6 +82,18 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 9fe9ad549b20bf442998a3c09a7f3cca, type: 3}
+    name: WalkingInStone
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: ed8036177dea2194eb688763898868e5, type: 3}
+    name: Soundtrack
+    volume: 0.3
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
 --- !u!81 &5403701741191735065
 AudioListener:
   m_ObjectHideFlags: 0

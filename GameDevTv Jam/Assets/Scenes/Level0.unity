@@ -22292,26 +22292,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 923180488290395072, guid: 7ba8120a64686b84c91b48bd0287f849, type: 3}
-      propertyPath: sounds.Array.data[6].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 9fe9ad549b20bf442998a3c09a7f3cca, type: 3}
-    - target: {fileID: 923180488290395072, guid: 7ba8120a64686b84c91b48bd0287f849, type: 3}
-      propertyPath: sounds.Array.data[6].loop
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 923180488290395072, guid: 7ba8120a64686b84c91b48bd0287f849, type: 3}
-      propertyPath: sounds.Array.data[6].name
-      value: WalkingInStone
-      objectReference: {fileID: 0}
-    - target: {fileID: 923180488290395072, guid: 7ba8120a64686b84c91b48bd0287f849, type: 3}
-      propertyPath: sounds.Array.data[6].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 923180488290395072, guid: 7ba8120a64686b84c91b48bd0287f849, type: 3}
-      propertyPath: sounds.Array.data[6].volume
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 923180488290395073, guid: 7ba8120a64686b84c91b48bd0287f849, type: 3}
       propertyPath: m_Name
       value: AudioManager
