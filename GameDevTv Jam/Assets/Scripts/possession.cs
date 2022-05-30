@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Audio;
 using UnityEngine;
 
 public class possession : MonoBehaviour
@@ -13,10 +14,12 @@ public class possession : MonoBehaviour
     [SerializeField] private GameObject SFX;
     [SerializeField] private GameObject col;
 
+    //private GameObject ghost;
+
     
     private void Update() {
         if(inRange && Input.GetButtonDown("Possess")){
-            if(col != null)
+            if (col != null)
                 Destroy(col);
             zombie.cam = player.GetComponent<Ghostcontroller>().cam;
             player.SetActive(false);
@@ -25,6 +28,7 @@ public class possession : MonoBehaviour
             zombie.originalPos = zombie.transform.position;
             zombie.SFX = SFX;
             SFX.SetActive(false);
+            FindObjectOfType<AudioManager>().Play("Ghost");
         }
     }
     
