@@ -13,6 +13,7 @@ public class Ghostcontroller : MonoBehaviour
     private float vertical, horizontal;
     private Rigidbody2D rb;
     private BoxCollider2D col;
+    private bool facingRight = true;
 
     void Awake()
     {
@@ -28,6 +29,20 @@ public class Ghostcontroller : MonoBehaviour
 
         direction = new Vector2(horizontal, vertical) * Time.fixedDeltaTime * speed;
         rb.velocity = direction;
+    }
 
+    private void Update() {
+        if(Mathf.Abs(horizontal) >= 0.01f){
+            Flip(horizontal);
+        }
+    }
+
+    private void Flip(float x){
+        if((x<0 && facingRight)||(x>0 && !facingRight)){
+            facingRight = !facingRight;
+            Vector3 Scale = transform.localScale;
+            Scale.x *= -1;
+            transform.localScale = Scale;
+        }
     }
 }

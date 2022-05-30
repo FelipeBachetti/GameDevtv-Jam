@@ -16,14 +16,11 @@ public class Player : MonoBehaviour
     private Vector2 facingRight;
     private Vector2 facingLeft;
     private Animator anim;
-    private float timer, animationTimer=.6f;
+    private float initialPos, finalPos, animationTimer=.6f;
 
-    private bool isJumping, grounded1, grounded2, willDie;
-
-    [SerializeField] private LayerMask whatIsGround1, whatIsGround2;
-    [SerializeField] private Transform GroundCheck;
-    [SerializeField] private float Radius;
+    private bool isJumping, willDie, hasInitialPos;
     [SerializeField] private bool autoAwake;
+    [SerializeField] private float maxFallHeight;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +29,6 @@ public class Player : MonoBehaviour
         facingLeft = transform.localScale;
         facingLeft.x = facingLeft.x * -1;
         anim = GetComponent<Animator>();
-        timer = .5f;
     }
 
     // Update is called once per frame
@@ -79,27 +75,25 @@ public class Player : MonoBehaviour
         }
 
         if(rb.velocity.y < -0.01){
-            timer -= Time.deltaTime;
+                if(!hasInitialPos){
+                    initialPos = transform.position.y;
+                    hasInitialPos = true;
+                }else{
+                    finalPos = transform.position.y;
+                }
         }else{
-            timer = .5f;
+            if(hasInitialPos){
+                hasInitialPos = false;
+                if(initialPos - finalPos > maxFallHeight){
+                    willDie = true;
+                }
+            }
         }
-
-        if(timer <= 0){
-            willDie = true;
-        }
-
-        grounded1 = Physics2D.OverlapCircle(GroundCheck.position, Radius, whatIsGround1);
-        grounded2 = Physics2D.OverlapCircle(GroundCheck.position, Radius, whatIsGround2);
     }
 
     void FixedUpdate()
     {
         rb.velocity = new Vector2(direction * speed, rb.velocity.y);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(GroundCheck.position, Radius);
     }
 
     private void Die(){

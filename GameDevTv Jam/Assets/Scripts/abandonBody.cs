@@ -8,7 +8,8 @@ public class abandonBody : MonoBehaviour
     public GameObject ghost, cam;
     public Vector3 originalPos;
     [HideInInspector] public CinemachineVirtualCamera vcam;
-    [HideInInspector] public GameObject SFX;
+    public GameObject SFX;
+    public bool canAbandon;
     
     private void OnEnable() {
         vcam = cam.GetComponent<CinemachineVirtualCamera>();
@@ -17,13 +18,14 @@ public class abandonBody : MonoBehaviour
     }
     void Update()
     {
-        if(Input.GetButtonDown("Possess")){
+        if(Input.GetButtonDown("Possess") && canAbandon){
             ghost.transform.position = transform.position;
             ghost.SetActive(true);
             vcam.Follow = ghost.transform;
             vcam.LookAt = ghost.transform;
             transform.position = originalPos;
-            SFX.SetActive(true);
+            if (SFX != null)
+                SFX.SetActive(true);
             gameObject.SetActive(false);
         }
     }
