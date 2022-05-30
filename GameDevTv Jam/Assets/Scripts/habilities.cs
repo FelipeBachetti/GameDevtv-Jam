@@ -11,7 +11,7 @@ public class habilities : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
 
     private bool isActing;
-    private float cooldown = .5f;
+    private float cooldown = .4f;
     public Animator anim;
 
     public bool isFalling;
@@ -24,18 +24,18 @@ public class habilities : MonoBehaviour
     {
         switch(bodyType){
             case 0:
-                if (Input.GetButtonDown("Fire1") && cooldown >= .25f)
+                if (Input.GetButtonDown("Fire1") && cooldown >= .4f)
 		        {
 			        Shoot();
 		        }
                 break;
             case 1:
-                if(Input.GetButtonDown("Fire1") && cooldown >= .25f){
+                if(Input.GetButtonDown("Fire1") && cooldown >= .4f){
                     Punch();
                 }
                 break;
             case 2:
-                if(Input.GetButtonDown("Fire1") && cooldown >= .25f){
+                if(Input.GetButtonDown("Fire1") && cooldown >= .4f){
                     Mine();
                 }
                 break;
@@ -48,7 +48,7 @@ public class habilities : MonoBehaviour
                 }
                 break;
         }
-        if(cooldown < 0.25f){
+        if(cooldown < 0.4f){
             cooldown += Time.deltaTime;
         }else{
             isActing = false;
@@ -85,6 +85,8 @@ public class habilities : MonoBehaviour
 
     void Shoot ()
 	{
+        isActing = true;
+        cooldown = 0f;
 		GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         if(transform.localScale.x<0){
             bullet.transform.localScale *= -1; 

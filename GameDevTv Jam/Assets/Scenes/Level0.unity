@@ -4313,6 +4313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 1.5
+  goToMenu: 0
 --- !u!1 &349870807
 GameObject:
   m_ObjectHideFlags: 0
@@ -20010,6 +20011,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 1.5
+  goToMenu: 0
 --- !u!61 &964088001
 BoxCollider2D:
   m_ObjectHideFlags: 0

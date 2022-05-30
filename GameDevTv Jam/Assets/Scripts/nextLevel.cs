@@ -8,6 +8,7 @@ public class nextLevel : MonoBehaviour
     private Animator anim;
     private GameObject Transition;
     [SerializeField] private float timer;
+    [SerializeField] private bool goToMenu;
 
     private void OnTriggerEnter2D(Collider2D other) {
         Transition = GameObject.Find("LoadingPanel");
@@ -29,7 +30,10 @@ public class nextLevel : MonoBehaviour
     }
 
     void NextScene(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        FindObjectOfType<AudioManager>().Play("OpenDoor");
+        if(!goToMenu){
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }else{
+            SceneManager.LoadScene("Menu");
+        }
     }
 }
