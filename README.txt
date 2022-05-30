@@ -1,0 +1,1 @@
+Link to game design document: https://docs.google.com/document/d/176BebnPYSmWxWeyPU2VlZOjdvIKO72Pq6xxpBQFiWq0/edit?usp=sharing
