@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.Audio;
 
 public class abandonBody : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class abandonBody : MonoBehaviour
             vcam.Follow = ghost.transform;
             vcam.LookAt = ghost.transform;
             transform.position = originalPos;
+            FindObjectOfType<AudioManager>().Play("Ghost");
             if (SFX != null)
                 SFX.SetActive(true);
             gameObject.SetActive(false);
