@@ -14,5 +14,7 @@ public class fallTrigger : MonoBehaviour
         b5.Break();
         b6.Break();
         hab.isFalling = true;
+        FindObjectOfType<AudioManager>().StopSound("WalkingInGrass");
+        FindObjectOfType<AudioManager>().StopSound("Jumping");
     }
 }
