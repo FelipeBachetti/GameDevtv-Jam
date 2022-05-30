@@ -57,6 +57,7 @@ public class Player : MonoBehaviour
             rb.AddForce(Vector2.up * jumpforce, ForceMode2D.Impulse);
             isJumping = true;
         }
+        Debug.Log(Mathf.Abs(rb.velocity.y));
         if(Mathf.Abs(direction)>0.01){
             anim.SetBool("isWalking", true);
         }else{
@@ -100,7 +101,6 @@ public class Player : MonoBehaviour
         rb.velocity = new Vector2(0, 0);
         anim.SetBool("isJumping", false);
         anim.SetTrigger("isDead");
-        col.enabled = false;
         hab.enabled = false;
         death.SetActive(true);
         this.enabled = false;
