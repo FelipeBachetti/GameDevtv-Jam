@@ -11,10 +11,13 @@ public class possession : MonoBehaviour
     private GameObject player;
 
     [SerializeField] private GameObject SFX;
+    [SerializeField] private GameObject col;
 
     
     private void Update() {
         if(inRange && Input.GetButtonDown("Possess")){
+            if(col != null)
+                Destroy(col);
             zombie.cam = player.GetComponent<Ghostcontroller>().cam;
             player.SetActive(false);
             zombie.gameObject.SetActive(true);
