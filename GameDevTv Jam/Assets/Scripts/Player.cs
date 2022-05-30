@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     private Animator anim;
     private float initialPos, finalPos, animationTimer=.6f;
 
+    private float timer = 0.5f;
+
     private bool isJumping, willDie, hasInitialPos;
     [SerializeField] private bool autoAwake;
     [SerializeField] private float maxFallHeight;
@@ -56,12 +58,21 @@ public class Player : MonoBehaviour
         {
             rb.AddForce(Vector2.up * jumpforce, ForceMode2D.Impulse);
             isJumping = true;
+            FindObjectOfType<AudioManager>().Play("Jumping");
         }
         Debug.Log(Mathf.Abs(rb.velocity.y));
         if(Mathf.Abs(direction)>0.01){
             anim.SetBool("isWalking", true);
-        }else{
+            if (timer >= .5f)
+            {
+                FindObjectOfType<AudioManager>().Play("WalkingInGrass");
+            }
+            timer = 0f;
+        }
+        else{
             anim.SetBool("isWalking", false);
+            timer = .5f;
+            FindObjectOfType<AudioManager>().StopSound("WalkingInGrass");
         }
         if(!isJumping){
             anim.SetBool("isJumping", false);
@@ -89,6 +100,11 @@ public class Player : MonoBehaviour
                     willDie = true;
                 }
             }
+        }
+
+        if(timer <= 0)
+        {
+            timer += Time.deltaTime;
         }
     }
 
