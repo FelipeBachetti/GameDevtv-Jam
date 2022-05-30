@@ -30,5 +30,6 @@ public class nextLevel : MonoBehaviour
 
     void NextScene(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        FindObjectOfType<AudioManager>().Play("OpenDoor");
     }
 }

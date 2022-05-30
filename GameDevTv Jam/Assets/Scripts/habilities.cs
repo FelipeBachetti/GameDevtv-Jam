@@ -65,6 +65,7 @@ public class habilities : MonoBehaviour
         foreach(Collider2D blocks in hitBlocks)
         {
             blocks.GetComponent<Block>().Break();
+            FindObjectOfType<AudioManager>().Play("Jumping");
         }
         isActing = true;
         cooldown = 0f;
