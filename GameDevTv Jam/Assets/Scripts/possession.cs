@@ -19,9 +19,6 @@ public class possession : MonoBehaviour
     
     private void Update() {
         if(inRange && Input.GetButtonDown("Possess")){
-            FindObjectOfType<AudioManager>().Play("Ghost");
-            //ghost =  GameObject.Find("LoadingPanel");
-            //ghost.GetComponent<AudioManager>().Play("Ghost");
             if (col != null)
                 Destroy(col);
             zombie.cam = player.GetComponent<Ghostcontroller>().cam;
@@ -31,6 +28,7 @@ public class possession : MonoBehaviour
             zombie.originalPos = zombie.transform.position;
             zombie.SFX = SFX;
             SFX.SetActive(false);
+            FindObjectOfType<AudioManager>().Play("Ghost");
         }
     }
     

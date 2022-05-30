@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    void Awake()
+    {
+        FindObjectOfType<AudioManager>().Play("Soundtrack");
+    }
+    
     public void PlayGame()
     {
         SceneManager.LoadScene("Level0");

@@ -27,7 +27,7 @@ public class habilities : MonoBehaviour
                 if (Input.GetButtonDown("Fire1") && cooldown >= .4f)
 		        {
 			        Shoot();
-		        }
+                }
                 break;
             case 1:
                 if(Input.GetButtonDown("Fire1") && cooldown >= .4f){
@@ -65,7 +65,7 @@ public class habilities : MonoBehaviour
         foreach(Collider2D blocks in hitBlocks)
         {
             blocks.GetComponent<Block>().Break();
-            FindObjectOfType<AudioManager>().Play("Jumping");
+            FindObjectOfType<AudioManager>().Play("Miner");
         }
         isActing = true;
         cooldown = 0f;
@@ -74,6 +74,7 @@ public class habilities : MonoBehaviour
     public void Punch ()
     {
         anim.SetTrigger("isAttacking");
+        FindObjectOfType<AudioManager>().Play("Punch");
         Collider2D[] hitBlocks = Physics2D.OverlapCircleAll(punchPoint.position, punchRange, pushableLayers);
         foreach(Collider2D blocks in hitBlocks)
         {
@@ -85,6 +86,7 @@ public class habilities : MonoBehaviour
 
     void Shoot ()
 	{
+        FindObjectOfType<AudioManager>().Play("Shooting");
         isActing = true;
         cooldown = 0f;
 		GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
