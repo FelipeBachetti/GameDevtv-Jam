@@ -29371,6 +29371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 0
+  goToMenu: 0
 --- !u!1 &350858515
 GameObject:
   m_ObjectHideFlags: 0
